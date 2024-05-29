@@ -1,58 +1,23 @@
 "use client"
-import Input from "@/components/Input";
-import { CheckBadgeIcon } from "@heroicons/react/24/outline";
-import { EnvelopeIcon, KeyIcon } from "@heroicons/react/24/solid";
-import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { FireIcon } from "@heroicons/react/24/solid";
-import login from "./actions";
-import { useFormState } from "react-dom";
-import Button from "@/components/button";
+import Link from "next/link";
 
 export default function Home() {
-  const [state, dispatch] = useFormState(login, null);
-
   return (
     <main className="max-w-screen-sm mx-auto py-20">
-     
       <div className="flex justify-center items-center mb-20">
-        <FireIcon className="text-red-500 w-20"/>
+        <FireIcon className="text-red-500 w-20" />
       </div>
-      
-      <form action={dispatch}>
-        <div>
-         <Input  
-            type="email"
-            name="email"
-            icon={<EnvelopeIcon />}
-            placeholder="Email"
-            errors={state?.erros?.fieldErrors.email}
-          />
-          <Input  
-            type="text"
-            name="username"
-            icon={<UserCircleIcon />}
-            placeholder="Username" 
-            autoComplete="username"
-            errors={state?.erros?.fieldErrors.username}
-          />
-          <Input  
-            type="password"
-            name="password"
-            icon={<KeyIcon />}
-            placeholder="Password" 
-            autoComplete="current-password"
-            errors={state?.erros?.fieldErrors.password}
-          />
-        </div>
 
-        <div className="mt-2 px-2">
-          <Button />
-        </div>
-
-        {state?.success && <div className="mt-2 mx-2 bg-green-600 h-14 flex items-center font-bold rounded-xl">
-          <CheckBadgeIcon className="w-6 mr-5 ml-5" /> Welcom back!
-        </div>}
-      </form>
-    </main>
-  );
+      <div className="flex flex-col p-2 gap-3">
+        <Link
+          className="rounded-full bg-slate-400 text-white p-3 text-center font-semibold"
+          href={"/create-account"}
+        >Go to Sign up</Link>
+        <Link
+          className="rounded-full bg-slate-400 text-white p-3 text-center font-semibold"
+          href={"/log-in"}
+        >Go to Log in</Link>
+      </div>
+    </main>);
 }
