@@ -24,5 +24,5 @@ export async function getProfile() {
 
 export async function logout() {
   await logoutSession();
-  redirect('/');
+  redirect('/create-account');
 }

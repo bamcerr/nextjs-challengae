@@ -87,5 +87,5 @@ export default async function createAccount(_: any, formData: FormData) {
 
   await loginSession(user.id);
 
-  redirect("/profile");
+  redirect("/");
 }

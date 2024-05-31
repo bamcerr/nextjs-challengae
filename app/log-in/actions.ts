@@ -73,6 +73,6 @@ export default async function login(_: any, formData: FormData) {
 
   if (id) {
     await loginSession(id);
-    redirect('/profile');
+    redirect('/');
   }
 }

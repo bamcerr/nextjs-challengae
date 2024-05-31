@@ -7,6 +7,7 @@ import { FireIcon } from "@heroicons/react/24/solid";
 import createAccount from "./actions";
 import { useFormState } from "react-dom";
 import Button from "@/components/button";
+import Link from "next/link";
 
 export default function CreateAccount() {
   const [state, dispatch] = useFormState(createAccount, null);
@@ -64,11 +65,14 @@ export default function CreateAccount() {
         <div className="mt-2 px-2">
           <Button>Sign Up</Button>
         </div>
-
-        {/* {state?.success && <div className="mt-2 mx-2 bg-green-600 h-14 flex items-center font-bold rounded-xl">
-          <CheckBadgeIcon className="w-6 mr-5 ml-5" /> Welcom back!
-        </div>} */}
       </form>
+
+      <div className="px-2 mt-4">
+        <Link
+          className="block w-full rounded-full bg-gray-100 border border-gray-200 p-3 text-center font-semibold hover:bg-gray-300"
+          href={"/log-in"}
+        >Go to Log in</Link>
+      </div>
     </main>
   )
 }
