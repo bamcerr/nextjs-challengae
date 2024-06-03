@@ -2,6 +2,8 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { getTweetList } from "./actions";
 import { dateFormat } from "@/lib/utils";
+import AddTweet from "@/components/add-tweet";
+import { pagenationLength } from "@/lib/constants";
 
 interface HomeProps {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -14,27 +16,31 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <main className="max-w-screen-sm mx-auto py-20">
       <h1 className="text-center text-2xl">Tweet</h1>
-      <div className="flex justify-between px-4">
-        <div>
-          {page !== 1 ?
-            <Link href={`/?page=${page - 1}`}>
-              <ArrowLeftIcon className="size-6" />
-            </Link> : null
+
+      <AddTweet />
+
+      <div className="flex justify-between px-10 mt-5">
+        <div className="flex justify-start min-w-10">
+          {page !== 1 ? <Link href={`/?page=${(page - 1)}`}>
+            <ArrowLeftIcon className="size-6" />
+          </Link> : null
           }
 
         </div>
-        <div>
-          {page < Math.floor(count / 1) ? <Link href={`/?page=${page + 1}`}>
+
+        <div className="flex justify-end min-w-10">
+          {page * pagenationLength < count ? <Link href={`/?page=${(page + 1)}`}>
             <ArrowRightIcon className="size-6" />
           </Link> : null}
         </div>
       </div>
-      <ul className="mt-1 border-b-0 border">
+
+      <ul className="mt-1">
         {tweets?.map((item, index) => (
-          <li key={item.id} >
+          <li key={item.id} className="mt-3 border-t">
             <Link href={`/${item.id}`} className="my-2 flex items-stretch px-4">
               <div className="w-6 flex items-center">
-                {page + index}
+                {item.id}
               </div>
               <div>
                 <div className="text-lg font-semibold">{item.tweet}</div>
@@ -44,7 +50,5 @@ export default async function Home({ searchParams }: HomeProps) {
           </li>
         ))}
       </ul>
-
-
     </main>);
 }
